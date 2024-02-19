@@ -7,31 +7,27 @@
 
 import SwiftUI
 
-enum Page: String, Identifiable {
-    case index, ingredientList, carrot
+enum Page: Hashable, Identifiable {
+    case index
+    case ingredientList
+    case description(data: ElementData)
     
-    var id: String {
-        self.rawValue
-    }
+    var id: Self { self }
 }
 
-enum Sheet: String, Identifiable {
-    case lion
+enum Sheet: Hashable, Identifiable {
+    case description(data: ElementData)
     
-    var id: String {
-        self.rawValue
-    }
+    var id: Self { self }
 }
 
-enum FullScreenCover: String, Identifiable {
-    case boba
+enum FullScreenCover: Hashable, Identifiable {
+    case description(data: ElementData)
     
-    var id: String {
-        self.rawValue
-    }
+    var id: Self { self }
 }
 
-enum PresentationModes: String, Identifiable {
+enum PresentationMode: String, Identifiable {
     case push, sheet, fullscreen
     
     var id: String {
@@ -49,7 +45,7 @@ class Coordinator {
         path.append(page)
     }
     
-    func presentSheet(_ sheet: Sheet) {
+    func present(sheet: Sheet) {
         self.sheet = sheet
     }
     
@@ -80,17 +76,17 @@ class Coordinator {
             IndexView()
         case .ingredientList:
             IngredientList()
-        case .carrot:
-            CarrotView()
+        case .description(let data):
+            DescriptionView(data: data)
         }
     }
     
     @ViewBuilder
     func Build(sheet: Sheet) -> some View {
         switch sheet {
-        case .lion:
+        case .description(let data):
             NavigationStack {
-                LionView()
+                DescriptionView(data: data)
             }
         }
     }
@@ -98,9 +94,9 @@ class Coordinator {
     @ViewBuilder
     func Build(fullscreenCover: FullScreenCover) -> some View {
         switch fullscreenCover {
-        case .boba:
+        case .description(let data):
             NavigationStack {
-                BobaView()
+                DescriptionView(data: data)
             }
         }
     }

@@ -10,9 +10,9 @@ import SwiftUI
 struct ViewNavFooter: View {
     
     @Environment(Coordinator.self) private var coordinator: Coordinator?
-    var presentationMode: PresentationModes
+    var presentationMode: PresentationMode
     
-    init(presentationMode: PresentationModes) {
+    init(presentationMode: PresentationMode) {
         self.presentationMode = presentationMode
     }
     

@@ -15,7 +15,7 @@ struct IngredientList: View {
         ZStack() {
             List {
                 Button("🥕 Carrot") {
-                    coordinator?.push(.carrot)
+                    coordinator?.push(.description(data: ElementData.carrotData))
                 }
             }
             VStack {

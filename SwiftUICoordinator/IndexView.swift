@@ -30,7 +30,7 @@ struct IndexView: View {
             }.headerProminence(.increased)
             Section("Animals") {
                 Button(action: {
-                    coordinator?.presentSheet(.lion)
+                    coordinator?.present(sheet: .description(data: ElementData.lionData))
                 }, label: {
                     HStack {
                         Text("🦁 Lion")
@@ -45,7 +45,7 @@ struct IndexView: View {
             }.headerProminence(.increased)
             Section("Drinks") {
                 Button(action: {
-                    coordinator?.present(fullscreenCover: .boba)
+                    coordinator?.present(fullscreenCover: .description(data: ElementData.bobaData))
                 }, label: {
                     HStack {
                         Text("🧋 Bubble Tea")
