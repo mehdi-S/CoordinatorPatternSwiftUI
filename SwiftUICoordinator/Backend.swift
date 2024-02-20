@@ -16,17 +16,19 @@ enum BackendIdentifier: Identifiable, Hashable {
     var id: Self { self }
 }
 
-struct ViewData {
-    var id: BackIds
+struct PageData: Identifiable, Hashable {
+    var pageId: PageID
     var presentation: PresentationMode
-    var type: PageTypes
+    var type: PageType
+    
+    var id: Self { self }
 }
 
-enum PageTypes {
+enum PageType {
     case detail, list
 }
 
-enum BackIds {
+enum PageID {
     case bobaDetails, lionDetails, carrotDetails, emptyDetails, indexList, ingredientList, emptyList
 }
 
@@ -38,18 +40,21 @@ enum BackendListIdentifier {
     case indexList, ingredientList, emptyList
 }
 
-func backendGetDetailDataFromID(backendIdentifier id: BackendDetailIdentifier) -> DetailData? {
+/// API Calls
+func backendGetDetailDataFromID(backendIdentifier id: PageID) -> DetailData? {
+    /// BDD Job
     let dataBase: [DetailData] = [DetailData.lionData, DetailData.carrotData, DetailData.bobaData]
     return dataBase.first { $0.pageIdentifier == id }
 }
 
-func backendGetListDataFromID(backendIdentifier id: BackendListIdentifier) -> ListData? {
+func backendGetListDataFromID(backendIdentifier id: PageID) -> ListData? {
+    /// BDD Job
     let dataBase: [ListData] = [ListData.indexList, ListData.ingredientList]
     return dataBase.first { $0.pageIdentifier == id }
 }
 
 struct ListData: Hashable {
-    var pageIdentifier: BackendListIdentifier
+    var pageIdentifier: PageID
     
     var navigationTitle: String
     private(set) var content: [ListElement]
@@ -68,7 +73,7 @@ struct ListData: Hashable {
     struct Button: Hashable {
         private(set) var title: String
         private(set) var accessory: Accessory?
-        private(set) var identifier: BackendIdentifier
+        private(set) var pageData: PageData
     }
     
     struct Accessory: Hashable {
@@ -79,7 +84,7 @@ struct ListData: Hashable {
 
 
 struct DetailData: Hashable {
-    var pageIdentifier: BackendDetailIdentifier
+    var pageIdentifier: PageID
     
     var navigationTitle: String
     private(set) var elementTitle: String
@@ -125,19 +130,19 @@ extension ListData {
                                                              button: ListData.Button(title: "🥗 Salads Ingredients",
                                                                                      accessory: ListData.Accessory(title: "Push",
                                                                                                                    imageIdentifier: "arrow.right.circle"),
-                                                                                     identifier: .list(id: .ingredientList, presentationMode: .push))),
+                                                                                     pageData: PageData(pageId: .ingredientList, presentation: .push, type: .list))),
                                         ListData.ListElement(section: ListData.Section(title: "Animals",
                                                                                        prominence: .increased),
                                                              button: ListData.Button(title: "🦁 Lion",
                                                                                      accessory: ListData.Accessory(title: "Sheet",
                                                                                                                    imageIdentifier: "arrow.up.right.bottomleft.rectangle"),
-                                                                                     identifier: .detail(id: .lionDetails, presentationMode: .sheet))),
+                                                                                     pageData: PageData(pageId: .lionDetails, presentation: .sheet, type: .detail))),
                                         ListData.ListElement(section: ListData.Section(title: "Drinks",
                                                                                        prominence: .increased),
                                                              button: ListData.Button(title: "🧋 Bubble Tea",
                                                                                      accessory: ListData.Accessory(title: "Fullscreen",
                                                                                                                    imageIdentifier: "arrow.down.left.and.arrow.up.right.square"),
-                                                                                     identifier: .detail(id: .bobaDetails, presentationMode: .fullscreen)))
+                                                                                     pageData: PageData(pageId: .bobaDetails, presentation: .fullscreen, type: .detail)))
                                     ])
     
     static let ingredientList = ListData(pageIdentifier: .ingredientList,
@@ -145,6 +150,6 @@ extension ListData {
         ListData.ListElement(button: ListData.Button(title: "🥕 Carrot",
                                                      accessory: ListData.Accessory(title: "Push",
                                                                                    imageIdentifier: "arrow.right.circle"),
-                                                     identifier: .detail(id: .carrotDetails, presentationMode: .push)))
+                                                     pageData: PageData(pageId: .carrotDetails, presentation: .push, type: .detail)))
     ])
 }

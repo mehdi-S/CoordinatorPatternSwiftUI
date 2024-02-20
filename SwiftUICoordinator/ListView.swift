@@ -12,32 +12,20 @@ struct ListView: View {
     @Environment(Coordinator.self) private var coordinator: Coordinator?
     private var listData: ListData
     
-    init(id: BackendListIdentifier) {
+    init(id: PageID) {
         self.listData = backendGetListDataFromID(backendIdentifier: id) ?? ListData.emptyList
     }
     
     @ViewBuilder
     func makeButton(buttonData: ListData.Button) -> some View {
         Button(action: {
-            switch buttonData.identifier {
-            case .detail(let id, let presentationMode):
-                switch presentationMode {
-                case .push:
-                    coordinator?.push(page: id)
-                case .sheet:
-                    <#code#>
-                case .fullscreen:
-                    <#code#>
-                }
-            case .list(let id, let presentationMode):
-                switch presentationMode {
-                case .push:
-                    coordinator?.push(buttonData.identifier)
-                case .sheet:
-                    <#code#>
-                case .fullscreen:
-                    <#code#>
-                }
+            switch buttonData.pageData.presentation {
+            case .push:
+                coordinator?.push(page: buttonData.pageData)
+            case .sheet:
+                coordinator?.present(sheet: buttonData.pageData)
+            case .fullscreen:
+                coordinator?.present(fullscreenCover: buttonData.pageData)
             }
         }, label: {
             HStack {

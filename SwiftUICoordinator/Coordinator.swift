@@ -37,19 +37,19 @@ enum PresentationMode: String, Identifiable {
 @Observable
 class Coordinator {
     var path = NavigationPath()
-    var sheet: BackendIdentifier?
-    var fullScreenCover: BackendIdentifier?
+    var sheet: PageData?
+    var fullScreenCover: PageData?
     
-    func push(page id: BackendIdentifier) {
-        path.append(id)
+    func push(page data: PageData) {
+        path.append(data)
     }
     
-    func present(sheet id: BackendIdentifier) {
-        self.sheet = id
+    func present(sheet data: PageData) {
+        self.sheet = data
     }
     
-    func present(fullscreenCover id: BackendIdentifier) {
-        self.fullScreenCover = id
+    func present(fullscreenCover data: PageData) {
+        self.fullScreenCover = data
     }
     
     func pop() {
@@ -69,39 +69,39 @@ class Coordinator {
     }
     
     @ViewBuilder
-    func Build(page id: BackendIdentifier) -> some View {
-        switch id {
-        case .detail(let id, let presentationMode):
-            DescriptionView(id: id, presentationMode: presentationMode)
-        case .list(let id, let presentationMode):
-            ListView(id: id)
+    func Build(page data: PageData) -> some View {
+        switch data.type {
+        case .detail:
+            DescriptionView(id: data.pageId, presentationMode: data.presentation)
+        case .list:
+            ListView(id: data.pageId)
         }
     }
     
     @ViewBuilder
-    func Build(sheet id: BackendIdentifier) -> some View {
-        switch id {
-        case .detail(let id, let presentationMode):
+    func Build(sheet data: PageData) -> some View {
+        switch data.type {
+        case .detail:
             NavigationStack {
-                DescriptionView(id: id, presentationMode: presentationMode)
+                DescriptionView(id: data.pageId, presentationMode: data.presentation)
             }
-        case .list(let id, let presentationMode):
+        case .list:
             NavigationStack {
-                ListView(id: id)
+                ListView(id: data.pageId)
             }
         }
     }
     
     @ViewBuilder
-    func Build(fullscreenCover id: BackendIdentifier) -> some View {
-        switch id {
-        case .detail(let id, let presentationMode):
+    func Build(fullscreenCover data: PageData) -> some View {
+        switch data.type {
+        case .detail:
             NavigationStack {
-                DescriptionView(id: id, presentationMode: presentationMode)
+                DescriptionView(id: data.pageId, presentationMode: data.presentation)
             }
-        case .list(let id, let presentationMode):
+        case .list:
             NavigationStack {
-                ListView(id: id)
+                ListView(id: data.pageId)
             }
         }
     }

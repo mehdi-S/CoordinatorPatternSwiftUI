@@ -13,7 +13,7 @@ struct DescriptionView: View {
     private var data: DetailData
     private var presentationMode: PresentationMode
     
-    init(id: BackendDetailIdentifier, presentationMode: PresentationMode) {
+    init(id: PageID, presentationMode: PresentationMode) {
         self.data = backendGetDetailDataFromID(backendIdentifier: id) ?? DetailData.emptyData
         self.presentationMode = presentationMode
     }
