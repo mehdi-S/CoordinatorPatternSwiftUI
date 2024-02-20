@@ -8,21 +8,20 @@
 import SwiftUI
 
 enum Page: Hashable, Identifiable {
-    case index
-    case ingredientList
-    case description(data: ElementData)
+    case list(data: ListData)
+    case description(data: DetailData, presentationMode: PresentationMode)
     
     var id: Self { self }
 }
 
 enum Sheet: Hashable, Identifiable {
-    case description(data: ElementData)
+    case description(data: DetailData)
     
     var id: Self { self }
 }
 
 enum FullScreenCover: Hashable, Identifiable {
-    case description(data: ElementData)
+    case description(data: DetailData)
     
     var id: Self { self }
 }
@@ -38,19 +37,19 @@ enum PresentationMode: String, Identifiable {
 @Observable
 class Coordinator {
     var path = NavigationPath()
-    var sheet: Sheet?
-    var fullScreenCover: FullScreenCover?
+    var sheet: BackendIdentifier?
+    var fullScreenCover: BackendIdentifier?
     
-    func push(_ page: Page) {
-        path.append(page)
+    func push(page id: BackendIdentifier) {
+        path.append(id)
     }
     
-    func present(sheet: Sheet) {
-        self.sheet = sheet
+    func present(sheet id: BackendIdentifier) {
+        self.sheet = id
     }
     
-    func present(fullscreenCover: FullScreenCover) {
-        self.fullScreenCover = fullscreenCover
+    func present(fullscreenCover id: BackendIdentifier) {
+        self.fullScreenCover = id
     }
     
     func pop() {
@@ -70,33 +69,39 @@ class Coordinator {
     }
     
     @ViewBuilder
-    func Build(page: Page) -> some View {
-        switch page {
-        case .index:
-            IndexView()
-        case .ingredientList:
-            IngredientList()
-        case .description(let data):
-            DescriptionView(data: data)
+    func Build(page id: BackendIdentifier) -> some View {
+        switch id {
+        case .detail(let id, let presentationMode):
+            DescriptionView(id: id, presentationMode: presentationMode)
+        case .list(let id, let presentationMode):
+            ListView(id: id)
         }
     }
     
     @ViewBuilder
-    func Build(sheet: Sheet) -> some View {
-        switch sheet {
-        case .description(let data):
+    func Build(sheet id: BackendIdentifier) -> some View {
+        switch id {
+        case .detail(let id, let presentationMode):
             NavigationStack {
-                DescriptionView(data: data)
+                DescriptionView(id: id, presentationMode: presentationMode)
+            }
+        case .list(let id, let presentationMode):
+            NavigationStack {
+                ListView(id: id)
             }
         }
     }
     
     @ViewBuilder
-    func Build(fullscreenCover: FullScreenCover) -> some View {
-        switch fullscreenCover {
-        case .description(let data):
+    func Build(fullscreenCover id: BackendIdentifier) -> some View {
+        switch id {
+        case .detail(let id, let presentationMode):
             NavigationStack {
-                DescriptionView(data: data)
+                DescriptionView(id: id, presentationMode: presentationMode)
+            }
+        case .list(let id, let presentationMode):
+            NavigationStack {
+                ListView(id: id)
             }
         }
     }

@@ -6,3 +6,5 @@
     - Make List generic view to set the presentation mode in data
 - make it so descriptionView be able to popTo Root from sheet and fsView 
 - leading text in descriptionView
+- rename elementData DetailData
+- make previews data for Views "LOCAL"

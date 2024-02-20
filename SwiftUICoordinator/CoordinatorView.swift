@@ -13,9 +13,9 @@ struct CoordinatorView: View {
     
     var body: some View {
         NavigationStack(path: $coordinator.path, root: {
-            coordinator.Build(page: .index)
-                .navigationDestination(for: Page.self) { page in
-                    coordinator.Build(page: page)
+            coordinator.Build(page: .list(id: .indexList, presentationMode: .push))
+                .navigationDestination(for: BackendIdentifier.self) { identifier in
+                    coordinator.Build(page: identifier)
                 }
                 .sheet(item: $coordinator.sheet) { sheet in
                     coordinator.Build(sheet: sheet)
