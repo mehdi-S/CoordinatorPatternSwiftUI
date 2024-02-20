@@ -20,13 +20,15 @@ struct DetailsView: View {
     
     var body: some View {
         VStack {
-            VStack(alignment: .leading, spacing: 16) {
-                Text(data.title)
-                    .font(.title)
-                    .fontWeight(.bold)
-                Text(data.description)
-                    .font(.body)
-            }.padding()
+            ScrollView {
+                VStack(alignment: .leading, spacing: 16) {
+                    Text(data.title)
+                        .font(.title)
+                        .fontWeight(.bold)
+                    Text(data.description)
+                        .font(.body)
+                }.padding()
+            }
             ViewNavFooter(presentationMode: presentationMode)
         }
         .containerRelativeFrame([.horizontal, .vertical])
