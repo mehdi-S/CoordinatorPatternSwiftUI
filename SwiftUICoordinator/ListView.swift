@@ -13,7 +13,7 @@ struct ListView: View {
     private var listData: ListData
     
     init(id: PageID) {
-        self.listData = backendGetListDataFromID(backendIdentifier: id) ?? ListData.emptyList
+        self.listData = backendGetListDataFromID(pageIdentifier: id) ?? ListData.emptyList
     }
     
     @ViewBuilder

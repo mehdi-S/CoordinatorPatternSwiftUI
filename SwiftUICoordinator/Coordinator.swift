@@ -7,33 +7,6 @@
 
 import SwiftUI
 
-enum Page: Hashable, Identifiable {
-    case list(data: ListData)
-    case description(data: DetailData, presentationMode: PresentationMode)
-    
-    var id: Self { self }
-}
-
-enum Sheet: Hashable, Identifiable {
-    case description(data: DetailData)
-    
-    var id: Self { self }
-}
-
-enum FullScreenCover: Hashable, Identifiable {
-    case description(data: DetailData)
-    
-    var id: Self { self }
-}
-
-enum PresentationMode: String, Identifiable {
-    case push, sheet, fullscreen
-    
-    var id: String {
-        self.rawValue
-    }
-}
-
 @Observable
 class Coordinator {
     var path = NavigationPath()
@@ -72,7 +45,7 @@ class Coordinator {
     func Build(page data: PageData) -> some View {
         switch data.type {
         case .detail:
-            DescriptionView(id: data.pageId, presentationMode: data.presentation)
+            DetailsView(id: data.pageId, presentationMode: data.presentation)
         case .list:
             ListView(id: data.pageId)
         }
@@ -83,7 +56,7 @@ class Coordinator {
         switch data.type {
         case .detail:
             NavigationStack {
-                DescriptionView(id: data.pageId, presentationMode: data.presentation)
+                DetailsView(id: data.pageId, presentationMode: data.presentation)
             }
         case .list:
             NavigationStack {
@@ -97,7 +70,7 @@ class Coordinator {
         switch data.type {
         case .detail:
             NavigationStack {
-                DescriptionView(id: data.pageId, presentationMode: data.presentation)
+                DetailsView(id: data.pageId, presentationMode: data.presentation)
             }
         case .list:
             NavigationStack {

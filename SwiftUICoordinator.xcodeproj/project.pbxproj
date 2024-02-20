@@ -15,7 +15,7 @@
 		C95A2184298676D800FAEFBF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C95A2183298676D800FAEFBF /* Assets.xcassets */; };
 		C95A2187298676D800FAEFBF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C95A2186298676D800FAEFBF /* Preview Assets.xcassets */; };
 		C95A218E2986771700FAEFBF /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95A218D2986771700FAEFBF /* ListView.swift */; };
-		C95A21962986775C00FAEFBF /* DescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95A21952986775C00FAEFBF /* DescriptionView.swift */; };
+		C95A21962986775C00FAEFBF /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C95A21952986775C00FAEFBF /* DetailsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +29,7 @@
 		C95A2183298676D800FAEFBF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C95A2186298676D800FAEFBF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C95A218D2986771700FAEFBF /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
-		C95A21952986775C00FAEFBF /* DescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionView.swift; sourceTree = "<group>"; };
+		C95A21952986775C00FAEFBF /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,7 +66,7 @@
 				3EB152622B82A2E70010BB0B /* CoordinatorView.swift */,
 				3EB152602B829FCA0010BB0B /* Coordinator.swift */,
 				C95A218D2986771700FAEFBF /* ListView.swift */,
-				C95A21952986775C00FAEFBF /* DescriptionView.swift */,
+				C95A21952986775C00FAEFBF /* DetailsView.swift */,
 				3EB152642B82B9270010BB0B /* ViewNavFooter.swift */,
 				3EB1526B2B83BC570010BB0B /* Backend.swift */,
 				C95A2183298676D800FAEFBF /* Assets.xcassets */,
@@ -158,7 +158,7 @@
 				3EB152652B82B9270010BB0B /* ViewNavFooter.swift in Sources */,
 				C95A2180298676D700FAEFBF /* SwiftUICoordinatorApp.swift in Sources */,
 				3EB1526C2B83BC570010BB0B /* Backend.swift in Sources */,
-				C95A21962986775C00FAEFBF /* DescriptionView.swift in Sources */,
+				C95A21962986775C00FAEFBF /* DetailsView.swift in Sources */,
 				3EB152612B829FCB0010BB0B /* Coordinator.swift in Sources */,
 				3EB152632B82A2E70010BB0B /* CoordinatorView.swift in Sources */,
 			);

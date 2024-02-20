@@ -1,5 +1,5 @@
 //
-//  DescriptionView.swift
+//  DetailsView.swift
 //  SwiftUICoordinator
 //
 //  Created by Alex Nagy on 29.01.2023.
@@ -7,24 +7,24 @@
 
 import SwiftUI
 
-struct DescriptionView: View {
+struct DetailsView: View {
     
     @Environment(Coordinator.self) private var coordinator: Coordinator?
     private var data: DetailData
     private var presentationMode: PresentationMode
     
     init(id: PageID, presentationMode: PresentationMode) {
-        self.data = backendGetDetailDataFromID(backendIdentifier: id) ?? DetailData.emptyData
+        self.data = backendGetDetailDataFromID(pageIdentifier: id) ?? DetailData.emptyData
         self.presentationMode = presentationMode
     }
     
     var body: some View {
         VStack {
             VStack(alignment: .leading, spacing: 16) {
-                Text(data.elementTitle)
+                Text(data.title)
                     .font(.title)
                     .fontWeight(.bold)
-                Text(data.elementDescription)
+                Text(data.description)
                     .font(.body)
             }.padding()
             ViewNavFooter(presentationMode: presentationMode)
@@ -35,8 +35,8 @@ struct DescriptionView: View {
     }
 }
 
-struct DescriptionView_Previews: PreviewProvider {
+struct DetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        DescriptionView(id: .bobaDetails, presentationMode: .push)
+        DetailsView(id: .bobaDetails, presentationMode: .push)
     }
 }
